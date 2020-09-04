@@ -115,6 +115,7 @@ float relugrad(float y)
 {
 	return y > 0;
 }
+/*
 static void convolutionFunction2()
 {
     for (; x < tl1; ++x)
@@ -166,7 +167,7 @@ static void convolutionFunction1(float(*action)(float))
         for (i = 0; i < LENGTH_FEATURE1; ++i)
         ((float *)f_layer1[j])[i] = action(((float *)f_layer1[j])[i] + n_bias0_1[j]);
 }
-
+ */
 static void forward(float(*action)(float))
 {
     CONVOLUTION_FORWARD(f_input,f_layer1, n_weight0_1, n_bias0_1, action);
@@ -178,13 +179,8 @@ static void forward(float(*action)(float))
 	SUBSAMP_MAX_FORWARD(f_layer3, f_layer4);
 
 
-
-    //freeMemory();
-    //weight2(weight4_5);
-
-	CONVOLUTION_Last(action);//CONVOLUTION_FORWARD_Last(f_layer4, f_layer5, weight4_5, n_bias4_5, action);
-	//DOT_PRODUCT_FORWARD(f_layer5, f_output, n_weight5_6, n_bias5_6, action);
-	DOT_PRODUCT_FORWARD_UPDATED(action);
+	CONVOLUTION_FORWARD_Last(f_layer4, f_layer5, weight4_5, n_bias4_5, action);
+	DOT_PRODUCT_FORWARD(f_layer5, f_output, n_weight5_6, n_bias5_6, action);
 }
 
 static inline void load_input(image input)
@@ -234,6 +230,7 @@ uint8 Predict(image input,uint8 count)
 	return get_result(count);
 }
 
+/*
 void freeMemory()
 {
     for(i=0;i<LAYER1;i++)
@@ -267,5 +264,5 @@ void freeMemory()
                     for(x=0;x<LENGTH_KERNEL;x++)
                             free(n_weight2_3[i][j][x]);
     free(n_weight2_3);
-}
+} */
 
