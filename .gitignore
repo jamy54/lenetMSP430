@@ -1,0 +1,10 @@
+Debug/
+targetConfigs/
+.settings/
+.launches/
+.ccsproject
+.project
+.cproject
+lenet2.zip
+lnk_msp430fr5994.cmd
+work.txt
